@@ -88,7 +88,7 @@ class MyHomePage extends StatelessWidget {
               child: Text(
                 'ประวัติการศึกษา',
                 style: GoogleFonts.prompt(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.teal[700],
                 ),
