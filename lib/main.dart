@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'My Resume',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 206, 15, 63)),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -30,22 +30,21 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resume'),
-        backgroundColor: const Color.fromARGB(255, 64, 170, 188),
+        backgroundColor: const Color.fromARGB(255, 243, 14, 37),
       ),
-      body: SingleChildScrollView( // เผื่อข้อมูลยาวเลื่อนได้
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // === รูปภาพส่วนตัว ===
+          
             Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(150),
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   'assets/p1.jpg',
-                  width: 150,
-                  height: 150,
+                  width: 180,
+                  height: 180,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return const Text(
@@ -60,46 +59,82 @@ class MyHomePage extends StatelessWidget {
 
             // === ชื่อ ===
             Text(
-              'นายธนวิชญ์ สิงห์เปีย',
+              'นางสาวสุธารส เกี๋ยงแก้ว',
               style: GoogleFonts.prompt(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
-
-            // === ภูมิลำเนา ===
-            Text(
-              'ภูมิลำเนา: จังหวัดชัยนาท',
-              style: GoogleFonts.prompt(fontSize: 18),
-            ),
-            const SizedBox(height: 8),
-
-            // === งานอดิเรก ===
-            Text(
-              'งานอดิเรก: ฟังเพลง , ดูซีรีย์',
-              style: GoogleFonts.prompt(fontSize: 18),
-            ),
             const SizedBox(height: 16),
 
-            // === ประวัติการศึกษา ===
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'ประวัติการศึกษา',
-                style: GoogleFonts.prompt(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal[700],
+            // === การจัดกลุ่มข้อมูล (Card: ภูมิลำเนา + งานอดิเรก) ===
+            Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ภูมิลำเนา',
+                      style: GoogleFonts.prompt(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color.fromARGB(255, 243, 14, 37),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'จังหวัดลำปาง',
+                      style: GoogleFonts.prompt(fontSize: 18),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'งานอดิเรก',
+                      style: GoogleFonts.prompt(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 243, 14, 37),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'ดูภาพยนตร์, ฟังเพลง',
+                      style: GoogleFonts.prompt(fontSize: 18),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
 
-            // ลิสต์การศึกษา
-            educationItem('ประถมศึกษา', 'โรงเรียนถาวรวิทยา', '2559'),
-            educationItem('มัธยมศึกษาตอนต้น', 'โรงเรียนหนองฉางวิทยา', '2562'),
-            educationItem('มัธยมศึกษาตอนปลาย', 'โรงเรียนกาญจนาภิเษกวิทยาลัย อุทัยธานี', '2565'),
+            const SizedBox(height: 20),
+
+            // ประวัติการศึกษา
+            Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ประวัติการศึกษา',
+                      style: GoogleFonts.prompt(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 243, 14, 37),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    educationItem('ประถมศึกษา', 'โรงเรียนอนุบาลสบปราบ', '2559'),
+                    educationItem('มัธยมศึกษาตอนต้น', 'โรงเรียนลำปางกัลยาณี', '2562'),
+                    educationItem('มัธยมศึกษาตอนปลาย', 'โรงเรียนลำปางกัลยาณี', '2565'),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
