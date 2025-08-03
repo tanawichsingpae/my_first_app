@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'My Resume',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 206, 15, 63)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -30,14 +30,14 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resume'),
-        backgroundColor: const Color.fromARGB(255, 243, 14, 37),
+        backgroundColor: const Color.fromARGB(255, 100, 203, 45),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-          
+            // รูปภาพ
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
@@ -57,9 +57,9 @@ class MyHomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // === ชื่อ ===
+            // ชื่อ
             Text(
-              'นางสาวสุธารส เกี๋ยงแก้ว',
+              'นายณฐวัฒน์ มีเดช',
               style: GoogleFonts.prompt(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -67,44 +67,40 @@ class MyHomePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // === การจัดกลุ่มข้อมูล (Card: ภูมิลำเนา + งานอดิเรก) ===
-            Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'ภูมิลำเนา',
-                      style: GoogleFonts.prompt(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 243, 14, 37),
-                      ),
+            //ภูมิลำเนา + งานอดิเรก
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'ภูมิลำเนา:',
+                    style: GoogleFonts.prompt(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 100, 203, 45),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'จังหวัดลำปาง',
-                      style: GoogleFonts.prompt(fontSize: 18),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'จังหวัดร้อยเอ็ด',
+                    style: GoogleFonts.prompt(fontSize: 18),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'งานอดิเรก:',
+                    style: GoogleFonts.prompt(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 100, 203, 45),
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'งานอดิเรก',
-                      style: GoogleFonts.prompt(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 243, 14, 37),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'ดูภาพยนตร์, ฟังเพลง',
-                      style: GoogleFonts.prompt(fontSize: 18),
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'ฟังเพลง , เล่นกีฬา',
+                    style: GoogleFonts.prompt(fontSize: 18),
+                  ),
+                ],
               ),
             ),
 
@@ -124,13 +120,33 @@ class MyHomePage extends StatelessWidget {
                       style: GoogleFonts.prompt(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 243, 14, 37),
+                        color: Color.fromARGB(255, 100, 203, 45),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    educationItem('ประถมศึกษา', 'โรงเรียนอนุบาลสบปราบ', '2559'),
-                    educationItem('มัธยมศึกษาตอนต้น', 'โรงเรียนลำปางกัลยาณี', '2562'),
-                    educationItem('มัธยมศึกษาตอนปลาย', 'โรงเรียนลำปางกัลยาณี', '2565'),
+                    const SizedBox(height: 12),
+
+                    // ระดับประถม
+                    educationBlock(
+                      level: 'ประถมศึกษา',
+                      school: 'โรงเรียนเพลงเมตตาศึกษา',
+                      year: '2559',
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ระดับม.ต้น
+                    educationBlock(
+                      level: 'มัธยมศึกษาตอนต้น',
+                      school: 'โรงเรียนหล่มสักวิทยาคม',
+                      year: '2562',
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ระดับม.ปลาย
+                    educationBlock(
+                      level: 'มัธยมศึกษาตอนปลาย',
+                      school: 'โรงเรียนหล่มสักวิทยาคม',
+                      year: '2565',
+                    ),
                   ],
                 ),
               ),
@@ -141,22 +157,31 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  // Widget ย่อยสำหรับรายการการศึกษา
-  Widget educationItem(String level, String school, String year) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('• ', style: TextStyle(fontSize: 18)),
-          Expanded(
-            child: Text(
-              '$level: $school (ปี $year)',
-              style: GoogleFonts.prompt(fontSize: 18),
-            ),
+  Widget educationBlock({
+    required String level,
+    required String school,
+    required String year,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          level,
+          style: GoogleFonts.prompt(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Colors.black87,
           ),
-        ],
-      ),
+        ),
+        Text(
+          'โรงเรียน: $school',
+          style: GoogleFonts.prompt(fontSize: 16),
+        ),
+        Text(
+          'ปีที่จบ: $year',
+          style: GoogleFonts.prompt(fontSize: 16),
+        ),
+      ],
     );
   }
 }
